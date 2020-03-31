@@ -1,0 +1,60 @@
+<ion-content padding class="animated fadeIn login auth-page">
+  <div class="login-content">
+    <div padding-horizontal text-center class="animated fadeInDown">
+      <div class="logo">
+        <h2 ion-text class="text-primary">
+          <strong>Ionic 3</strong> Start Theme
+        </h2>
+      </div>
+    </div>
+
+    <form class="list-form">
+      <ion-item>
+        <ion-label floating>
+          <ion-icon name="mail" item-start class="text-primary" >            
+          </ion-icon>
+        </ion-label>          
+          <ion-input type="email" placeholder="Email" #userName required></ion-input>       
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating> 
+          <ion-icon name="key" item-start class="text-primary"></ion-icon>          
+        </ion-label>
+        <ion-input type="password" placeholder="Password" #userPassword required></ion-input>
+      </ion-item>
+
+
+    </form>
+    <p text-right ion-text color="secondary" tappable  routerLink="/forgotpass"><strong>Forgot Password?</strong></p>
+
+    <div>
+      <button ion-button icon-start block color="dark" tappable (click)="authService.SignIn(userName.value,userPassword.value )">
+        <ion-icon name="log-in"></ion-icon>
+        SIGN IN
+      </button>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-4>
+            <button ion-button icon-only block tappable (click)="authService.FacebookAuth()">
+              <ion-icon name="logo-facebook"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col col-4>
+            <button ion-button icon-only block  tappable (click)="authService.TwitterAuth()">
+              <ion-icon name="logo-twitter"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col col-4>
+            <button ion-button icon-only block  tappable (click)="authService.GoogleAuth()">
+              <ion-icon name="logo-google"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </div>
+
+  </div>
+
+</ion-content>

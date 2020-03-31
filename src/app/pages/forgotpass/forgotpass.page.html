@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Reset Password</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="displayTable">
+    <div class="displayTableCell">
+      <div class="authBlock">
+        <p class="text-center">Please enter your email address to request a password reset.</p>
+        <div class="formGroup">
+          <ion-item>
+            <ion-label floating>
+              <ion-icon name="mail" item-start class="text-primary" >            
+              </ion-icon>
+            </ion-label>          
+              <ion-input type="email" placeholder="Email" #userName required></ion-input>       
+          </ion-item>
+        </div>
+
+          <!-- Calling ForgotPassword from AuthService Api -->
+        <div class="formGroup"> 
+          <ion-label floating>
+            
+          </ion-label>
+          <button ion-button block color="dark" tappable (click)="authService.ForgotPassword(userName.value)">
+              SEND EMAIL
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</ion-content>
