@@ -13,6 +13,8 @@ import {AuthService} from '../app/shared/services/auth.service'
 })
 export class AppComponent implements OnInit  {
   isLoggedIn$;
+  isLoggedins;
+
   console=console;
 
   public selectedIndex = 0;
@@ -37,10 +39,14 @@ export class AppComponent implements OnInit  {
 
   ) {
     this.initializeApp();
+
     this.authService.isLoggedIn.subscribe((_user) =>
     {
       this.isLoggedIn$ = _user
     })
+
+    this.authService.LoggedIns
+
   }
 
   initializeApp() {

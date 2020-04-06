@@ -1,60 +1,84 @@
-<ion-content padding class="animated fadeIn login auth-page">
-  <div class="login-content">
-    <div padding-horizontal text-center class="animated fadeInDown">
-      <div class="logo">
-        <h2 ion-text class="text-primary">
-          <strong>Ionic 3</strong> Start Theme
-        </h2>
-      </div>
+<ion-content  padding class="background" >
+  <div class="container-login100" style="background-image: url('../../../assets/bg-01.jpg');"> 
+    <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+      <form class="login100-form validate-form">
+        <span class="login100-form-title p-b-49">
+          Login
+        </span>
+
+        <ion-item>
+          <ion-label floating>
+            <ion-icon name="mail" item-start class="text-primary" >            
+            </ion-icon>
+          </ion-label>          
+            <ion-input background ="white" type="email" placeholder="Email" #userName required></ion-input>       
+        </ion-item>
+  
+        <ion-item>
+          <ion-label floating> 
+            <ion-icon name="key" item-start class="text-primary"></ion-icon>          
+          </ion-label>
+          <ion-input background ="white" type="password" placeholder="Password" #userPassword required></ion-input>
+        </ion-item>     
+        
+        <div class="p-t-8 p-b-31 forgot-pass">
+          <a href="/forgotpass">
+            Forgot password?
+          </a>
+        </div>
+
+        <div class="container-login100-form-btn">
+          <div class="wrap-login100-form-btn">
+            
+            <button ion-button color="black" class="login100-form-bgbtn" (click)="authService.SignIn(userName.value,userPassword.value )">
+              <ion-icon name="log-in"></ion-icon>
+              Login
+            </button>
+          </div>
+        </div>
+
+        <div class="txt1 p-t-54 p-b-20">
+          <span>
+            Or Sign In Using
+          </span>
+        </div>
+
+        <ion-grid>
+          <ion-row>
+            <ion-col size ="2" offset="3">
+              <ion-fab>
+                <ion-fab-button color = "primary" size="small" (click)="authService.FacebookAuth()">
+                  <ion-icon  name="logo-facebook"></ion-icon>
+                </ion-fab-button>
+                
+              </ion-fab>
+            </ion-col>
+            <ion-col size ="2">
+              <ion-fab>
+              <ion-fab-button color = "secondary" size="small" (click)="authService.TwitterAuth()">
+                <ion-icon  name="logo-twitter"></ion-icon>
+              </ion-fab-button>
+            </ion-fab>
+            </ion-col>
+            <ion-col size ="2">
+              <ion-fab>
+                <ion-fab-button color = "danger" size="small" (click)="authService.GoogleAuth()">
+                  <ion-icon  name="logo-google"></ion-icon>
+                </ion-fab-button>
+              </ion-fab>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <div class="txt1 p-t-90 p-b-20">
+          <span>
+            Sign Up Here!
+          </span>
+        </div>
+
+      </form>
     </div>
-
-    <form class="list-form">
-      <ion-item>
-        <ion-label floating>
-          <ion-icon name="mail" item-start class="text-primary" >            
-          </ion-icon>
-        </ion-label>          
-          <ion-input type="email" placeholder="Email" #userName required></ion-input>       
-      </ion-item>
-
-      <ion-item>
-        <ion-label floating> 
-          <ion-icon name="key" item-start class="text-primary"></ion-icon>          
-        </ion-label>
-        <ion-input type="password" placeholder="Password" #userPassword required></ion-input>
-      </ion-item>
-
-
-    </form>
-    <p text-right ion-text color="secondary" tappable  routerLink="/forgotpass"><strong>Forgot Password?</strong></p>
-
-    <div>
-      <button ion-button icon-start block color="dark" tappable (click)="authService.SignIn(userName.value,userPassword.value )">
-        <ion-icon name="log-in"></ion-icon>
-        SIGN IN
-      </button>
-      <ion-grid>
-        <ion-row>
-          <ion-col col-4>
-            <button ion-button icon-only block tappable (click)="authService.FacebookAuth()">
-              <ion-icon name="logo-facebook"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col col-4>
-            <button ion-button icon-only block  tappable (click)="authService.TwitterAuth()">
-              <ion-icon name="logo-twitter"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col col-4>
-            <button ion-button icon-only block  tappable (click)="authService.GoogleAuth()">
-              <ion-icon name="logo-google"></ion-icon>
-            </button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-
-    </div>
-
+  
   </div>
 
 </ion-content>

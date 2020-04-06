@@ -27,17 +27,12 @@ export class AuthGuard implements CanActivate {
       this.router.navigate(['login'])
       return false;
     }*/
-    if (this.authService.LoggedIns)
-    {
-      return true;
-    }           
-    else
-    {
-      console.log("Logged In value auth guard", this.authService.LoggedIns)
-      this.router.navigate(['login'])
-      return false;
-    }
-      
-  
-    }
-    }
+          if (this.isLoggedIn$!==true)
+          {
+            console.log("Logged In value auth guard", this.authService.LoggedIns)
+            this.router.navigate(['login'])
+          } 
+
+      return true;      
+  }
+}

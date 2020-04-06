@@ -105,10 +105,12 @@ export class AuthService {
       return this.afAuth.auth.signInWithPopup(provider)
       .then((result) => {
         this.ngZone.run(() => {
+            console.log("Auth but trying to navigate to route");
             this.loggedIn.next(true);
-            this.router.navigate(['home/inventory']);
+            this.SetUserData(result.user);
+            this.router.navigate(['/home/inventory']);
           })
-        this.SetUserData(result.user);
+        
       }).catch((error) => {
         window.alert(error)
       })

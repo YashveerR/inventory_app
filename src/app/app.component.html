@@ -1,14 +1,14 @@
 <ion-app>
   {{ console.log('----------------> Logging', isLoggedIn$) }}
   <ion-split-pane   contentId="main-content">
-    <ion-menu  contentId="main-content" type="overlay">
+    <ion-menu  *ngIf="isLoggedIn$" contentId="main-content" type="overlay">
       <ion-content>
         <ion-list id="view-list">
           <ion-list-header>Menu</ion-list-header>
           <ion-note>place customer login name here from auth service</ion-note>
 
           <ion-menu-toggle  auto-hide="false"  *ngFor="let p of appPages; let i = index">
-            <ion-item   *ngIf="isLoggedIn$" (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="i">
+            <ion-item    (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="i">
               <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>

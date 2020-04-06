@@ -1,36 +1,35 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Reset Password</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content  padding class="background" >
+  <div class="container-login100" style="background-image: url('../../../assets/bg-01.jpg');"> 
+    <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+      <form class="login100-form validate-form">
+        <span class="login100-form-title p-b-65">
+          Forgot Password
+        </span>
 
-<ion-content>
-  <div class="displayTable">
-    <div class="displayTableCell">
-      <div class="authBlock">
-        <p class="text-center">Please enter your email address to request a password reset.</p>
-        <div class="formGroup">
-          <ion-item>
-            <ion-label floating>
-              <ion-icon name="mail" item-start class="text-primary" >            
-              </ion-icon>
-            </ion-label>          
-              <ion-input type="email" placeholder="Email" #userName required></ion-input>       
-          </ion-item>
-        </div>
-
-          <!-- Calling ForgotPassword from AuthService Api -->
-        <div class="formGroup"> 
+        <ion-item>
           <ion-label floating>
-            
-          </ion-label>
-          <button ion-button block color="dark" tappable (click)="authService.ForgotPassword(userName.value)">
-              SEND EMAIL
-          </button>
+            <ion-icon name="mail" item-start class="text-primary" >            
+            </ion-icon>
+          </ion-label>          
+            <ion-input background ="white" type="email" placeholder="Email" #userName required></ion-input>       
+        </ion-item>  
+
+        <div class="p-t-54 p-b-20">
+
         </div>
 
-      </div>
+        <div class="container-login100-form-btn">
+          <div class="wrap-login100-form-btn " >            
+            <button ion-button color="black" class="login100-form-bgbtn" (click)="authService.ForgotPassword(userName.value)">
+              <ion-icon name="log-in"></ion-icon>
+              Login
+            </button>
+          </div>
+        </div>
 
+      </form>
     </div>
+  
   </div>
+
 </ion-content>
