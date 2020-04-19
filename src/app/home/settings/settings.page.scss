@@ -1,0 +1,45 @@
+ion-content {
+    --background: url(../../../assets/bg-01.jpg) 0 0/100% 100% no-repeat;
+}
+
+.home {
+
+    scroll-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    ion-grid {
+        padding: 0;
+        height: 100%;
+    }
+
+    ion-row {
+        flex: 1;
+    }
+
+    ion-col {
+        flex: 1;
+    }
+
+    
+
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+  }
+
+
+  .one {
+    flex: 1;
+  }
+
+  .two {
+    flex: 1;
+  }
+
+  .three {
+    flex: 1;
+  }

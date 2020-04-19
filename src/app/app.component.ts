@@ -12,7 +12,7 @@ import {AuthService} from '../app/shared/services/auth.service'
   styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit  {
-  isLoggedIn$;
+  isLoggedIn$ = false;
   isLoggedins;
 
   console=console;
@@ -29,6 +29,7 @@ export class AppComponent implements OnInit  {
       url: '/home/settings',
       icon: 'construct'
     }
+
   ];
 
   constructor(
@@ -43,10 +44,9 @@ export class AppComponent implements OnInit  {
     this.authService.isLoggedIn.subscribe((_user) =>
     {
       this.isLoggedIn$ = _user
-    })
+    }) 
 
-    this.authService.LoggedIns
-
+    //this.isLoggedIn$ = this.authService.LoggedIns
   }
 
   initializeApp() {
@@ -57,11 +57,14 @@ export class AppComponent implements OnInit  {
   }
 
   ngOnInit() {
+
     const path = window.location.pathname.split('home/')[1];
 	console.log("path variable", path);
     if (path !== undefined) {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
 	  console.log("selected index", this.selectedIndex);
     }
+
+    
   }
 }

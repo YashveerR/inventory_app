@@ -29,4 +29,8 @@ export class Crud {
     delete_module(rec_id){
         this.firestore.doc('devices/' + rec_id).delete();
     }
+
+    read_hist_data(rec_id){
+        return this.firestore.collection('devices').doc(rec_id).collection('data_history').get()                                
+    }
 }

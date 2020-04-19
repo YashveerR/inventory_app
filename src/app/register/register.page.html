@@ -1,0 +1,42 @@
+<ion-content  padding class="background" >
+  <div class="container-login100" style="background-image: url('../../../assets/bg-01.jpg');"> 
+    <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+      <form class="login100-form validate-form">
+        <span class="login100-form-title p-b-65">
+          Register
+        </span>
+
+        <ion-item>
+          <ion-label floating>
+            <ion-icon name="mail" item-start class="text-primary" >            
+            </ion-icon>
+          </ion-label>          
+            <ion-input background ="white" type="email" placeholder="Email" #userName required></ion-input>       
+        </ion-item>  
+
+        <ion-item>
+          <ion-label floating> 
+            <ion-icon name="key" item-start class="text-primary"></ion-icon>          
+          </ion-label>
+          <ion-input background ="white" type="password" placeholder="Password" #userPassword required></ion-input>
+        </ion-item>     
+
+        <div class="p-t-54 p-b-20">
+
+        </div>
+
+        <div class="container-login100-form-btn">
+          <div class="wrap-login100-form-btn " >            
+            <button ion-button color="black" class="login100-form-bgbtn" (click)="authService.SignUp(userName.value,userPassword.value )">
+              <ion-icon name="log-in"></ion-icon>
+              Register
+            </button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  
+  </div>
+
+</ion-content>

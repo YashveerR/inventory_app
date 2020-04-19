@@ -23,6 +23,14 @@ const routes: Routes = [
   {
     path: 'home/inventory',
     loadChildren: () => import('./home/inventory/inventory.module').then( m => m.InventoryPageModule), canActivate: [AuthGuard]
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'home/inventory/chart',
+    loadChildren: () => import('./home/chart/chart.module').then( m => m.ChartPageModule)
   }
 ];
 

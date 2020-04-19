@@ -31,6 +31,7 @@ export class AuthService {
     logged in and setting up null when logged out */
     this.afAuth.authState.subscribe(user => {
         if (user) {
+          console.log("DO WE EVEN GET HERE!!!!!!!");
           this.userData = user;
           localStorage.setItem('user', JSON.stringify(this.userData));
           JSON.parse(localStorage.getItem('user'));
@@ -58,6 +59,7 @@ export class AuthService {
           //up and returns promise 
           this.SendVerificationMail();
           this.SetUserData(result.user);
+          this.router.navigate(['login']);
         }).catch((error) => {
           window.alert(error.message)
         })
@@ -77,8 +79,8 @@ export class AuthService {
           this.ngZone.run(() => {
             this.loggedIn.next(true);
             
-            console.log("Logged In value auth inner guard", this.loggedIn.value)  
-            this.router.navigate(['home']);
+            console.log("Logged In value sign in ", this.loggedIn.value)  
+            this.router.navigate(['/home/inventory']);
 
           });
           this.SetUserData(result.user);
@@ -106,11 +108,11 @@ export class AuthService {
       .then((result) => {
         this.ngZone.run(() => {
             console.log("Auth but trying to navigate to route");
-            this.loggedIn.next(true);
-            this.SetUserData(result.user);
+            
+            this.loggedIn.next(true);            
             this.router.navigate(['/home/inventory']);
           })
-        
+          this.SetUserData(result.user);
       }).catch((error) => {
         window.alert(error)
       })
@@ -120,7 +122,13 @@ export class AuthService {
     provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
     SetUserData(user) {
       const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+      console.log("data user id", user.uid);
+      console.log("data user disp name", user.displayName);
+      console.log("data user phot ", user.photoURL);
+      console.log("data user verified", user.emailVerified);
+
       const userData: User = {
+        
         uid: user.uid,
         email: user.email,
         displayName: user.displayName,
@@ -134,7 +142,9 @@ export class AuthService {
     // Returns true when user is looged in and email is verified
     get LoggedIns(): boolean {
       const user = JSON.parse(localStorage.getItem('user'));
-      return (user !== null && user.emailVerified !== false) ? true : false;
+
+      console.log("Logged In value loggedins function",(user !== null && user.emailVerified !== false) ? true : false)
+      return ((user !== null && user.emailVerified !== false)) ? true : false;
     }    
       // Sign out 
     SignOut() {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Crud} from '../../shared/services/crud'
+import {ChartPage} from '../chart/chart.page'
 
 @Component({
   selector: 'app-inventory',
