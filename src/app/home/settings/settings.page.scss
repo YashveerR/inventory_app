@@ -28,9 +28,10 @@ ion-content {
 
 .flex-container {
     display: flex;
-    flex-direction: row;
   }
-
+.label-direction {
+  margin:auto;
+}
 
   .one {
     flex: 1;
@@ -43,3 +44,26 @@ ion-content {
   .three {
     flex: 1;
   }
+
+  .container-login100 {
+    width: 100%;  
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    flex:1;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background: #fff;
+  }
+
+  .danger_btn {
+    background-color: red;
+  }
+
