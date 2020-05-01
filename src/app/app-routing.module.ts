@@ -29,7 +29,7 @@ const routes: Routes = [
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   },
   {
-    path: 'home/inventory/chart',
+    path: 'home/inventory/chart/:name',
     loadChildren: () => import('./home/chart/chart.module').then( m => m.ChartPageModule)
   }
 ];

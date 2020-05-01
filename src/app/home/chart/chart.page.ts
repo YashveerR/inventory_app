@@ -3,6 +3,7 @@ import { AngularFireList} from '@angular/fire/database';
 import { Chart } from 'chart.js';
 import {Crud} from '../../shared/services/crud'
 import { Observable } from 'rxjs';
+import { Router, ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-chart',
@@ -17,6 +18,7 @@ export class ChartPage implements OnInit {
   time_arr:any[] = [];
   arr_cnt:number = 0;
 
+
   labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"] 
   data2: [12, 19, 3, 5, 2, 3]
   
@@ -29,10 +31,17 @@ export class ChartPage implements OnInit {
   colorArray: any;
   chartData = null;
 
-  constructor(private crud_service:Crud) { }
+  doc_id:string;
+  product_id: string;
+  constructor(private crud_service:Crud,    
+    private route: ActivatedRoute) { 
+
+      this.product_id = this.route.snapshot.params.id;
+      console.log("route parameter",  this.product_id );
+    }
 
   ngOnInit() {
-    
+
   }
 
   ionViewDidEnter() {
@@ -46,7 +55,7 @@ export class ChartPage implements OnInit {
     var n_data_arr = [];
     var n_labels_arr = [];
 
-    var result =  this.crud_service.read_hist_data('IpGvAMwKPTwCcPZJQahA').subscribe(data =>{
+    var result =  this.crud_service.read_hist_data(this.product_id).subscribe(data =>{
 
         data.query.orderBy("timestamp").get().then(snapshot => {
         console.log("Snapshot value", snapshot.size);
@@ -58,11 +67,6 @@ export class ChartPage implements OnInit {
           var timimgz = new Date(timing * 1000);
           this.val_arr.push(valuez)
           this.time_arr.push(timimgz.toDateString())
-          console.log(timimgz.toDateString());
-          console.log("Retrieved data from firestore: ",valuez,timimgz );
-          //this.val_arr[this.arr_cnt] = new_data.data;
-          //this.time_arr[this.arr_cnt++] = timimgz.toLocaleDateString();
-          console.log("counter ",this.arr_cnt );
           if (this.chartData) {
             this.updateCharts(this.val_arr, this.time_arr)
           } else {
@@ -72,8 +76,6 @@ export class ChartPage implements OnInit {
         });
 
       });      
-      
-      console.log("This is after the subscribe");
      })
    
   }
