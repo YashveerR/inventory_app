@@ -17,6 +17,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 // Auth service
 import { AuthService } from "./shared/services/auth.service";
 import { CommonModule } from '@angular/common';
+import { AuthGuard } from "./shared/guard/auth.guard";
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,7 +36,8 @@ import { CommonModule } from '@angular/common';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    AuthService
+    AuthService, 
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

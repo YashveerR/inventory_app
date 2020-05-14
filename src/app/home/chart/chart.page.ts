@@ -42,6 +42,9 @@ export class ChartPage implements OnInit {
 
   ngOnInit() {
 
+      this.route.paramMap.subscribe(params => {
+            this.product_id = params.get('name');
+      });
   }
 
   ionViewDidEnter() {

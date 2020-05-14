@@ -7,7 +7,7 @@ import { SecureInnerPagesGuard } from "../app/shared/guard/secure-inner-pages.gu
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule), canActivate: [AuthGuard]},
+  { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)},
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
@@ -18,11 +18,11 @@ const routes: Routes = [
   },
   {
     path: 'home/settings',
-    loadChildren: () => import('./home/settings/settings.module').then( m => m.SettingsPageModule), canActivate: [AuthGuard]
+    loadChildren: () => import('./home/settings/settings.module').then( m => m.SettingsPageModule), 
   },
   {
     path: 'home/inventory',
-    loadChildren: () => import('./home/inventory/inventory.module').then( m => m.InventoryPageModule), canActivate: [AuthGuard]
+    loadChildren: () => import('./home/inventory/inventory.module').then( m => m.InventoryPageModule), 
   },
   {
     path: 'register',

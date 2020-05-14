@@ -2,7 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import {Crud} from '../../shared/services/crud'
 import {devices} from '../../shared/services/devices'
 import {device_data} from '../../shared/services/devicedata'
-import { Observable } from 'rxjs';
+import { AngularFireAuth } from "@angular/fire/auth";
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import {AngularFirestore} from '@angular/fire/firestore'
+import { firestore } from 'firebase/app';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-inventory',
@@ -13,6 +18,7 @@ export class InventoryPage implements OnInit {
 
   public dev_data_arr: device_data[]=[];  
 
+  current_user:string;
   clientsId:string;
   clientsSense:string;
   clientsSenseVal:number;
@@ -30,57 +36,56 @@ export class InventoryPage implements OnInit {
 
   //ret_val:any;
 
-  constructor(private crud_service:Crud) { 
-    var objct:any[]=[];
-    
-    console.log("This is happening meow")
-    
+  constructor(
+    private crud_service:Crud, 
+    private firestore: AngularFirestore,
+    public afAuths: AngularFireAuth) { 
+    var objct:any[]=[];        
   }
 
-  ngOnInit() {
+  isLoggedIn() {
+    return this.afAuths.authState.pipe(first()).toPromise();
+ }
+
+ async doSomething() {
+  const user = await this.isLoggedIn()
+
+  if (user) {
+    this.data_here = false;
+    this.read();
+    //this.calculate();     
     
-    this.userdata = JSON.parse(localStorage.getItem('user'));
+  } else {
+    // do something else
+ }
+}
+ 
+  ngOnInit() { 
 
-    let ret_val= this.crud_service.read_linked_devices(this.userdata["uid"]).subscribe(data => {
-      
-      this.devices_list = data.data()['linked_devices']
-      this.devices_list.forEach((value)=> {
-        
-        this.crud_service.read_data(value['id']).subscribe(linkdata => {
-          
-                    console.log("subscribe in loop ",linkdata.data())
-                    var temp:device_data={clientsId: linkdata.data()['Client'],
-                                          clientsSense: linkdata.data()['Sense01'],
-                                          clientsSenseVal: linkdata.data()['Sense01Val'],
-                                          clientsVolume: linkdata.data()['Volume'],
-                                          dynamicColor: "",
-                                          dynamicMessage:"",
-                                          dynamicVolume:50 
-                                        };
-                    this.dev_data_arr.push(temp);  
-                    this.calculate();     
-                    this.data_here = true;                               
-        });
-      });
-      
-    })
-
+    this.doSomething();
   }
 
   doRefresh(event) {
-    this.data_here = false;  
+    this.data_here = false;   //set flag to draw the blocks to false
     console.log('Begin async operation');
+    this.devices_list = []; //empty device list
+    this.devices_list.length=0; //empty the
+    this.dev_data_arr.length = 0;
     this.read();
-    
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      event.target.complete();
-    }, 2000);
+   
+      
+      setTimeout(() => {     
+        //this.calculate();     
+        //this.data_here = true;      
+        console.log('Async operation has ended');
+        event.target.complete();
+      }, 2000);
+
+
   }
 
   calculate()
   {
-
 
     this.dev_data_arr.forEach((value)=>{
         value.dynamicVolume = (value.clientsSenseVal / value.clientsVolume) * 100
@@ -107,9 +112,11 @@ export class InventoryPage implements OnInit {
   {
     this.userdata = JSON.parse(localStorage.getItem('user'));
 
-    let ret_val= this.crud_service.read_linked_devices(this.userdata["uid"]).subscribe(data => {
+     this.crud_service.read_linked_devices(this.userdata["uid"]).subscribe(data => {
+      
       
       this.devices_list = data.data()['linked_devices']
+      console.log("Devices list length",this.devices_list.length)
       this.devices_list.forEach((value)=> {
         
         this.crud_service.read_data(value['id']).subscribe(linkdata => {
@@ -123,13 +130,15 @@ export class InventoryPage implements OnInit {
                                           dynamicMessage:"",
                                           dynamicVolume:25 
                                         };
-                    this.dev_data_arr.push(temp);  
-                    this.calculate();     
-                    this.data_here = true;                               
+                    this.dev_data_arr.push(temp); 
+                    this.calculate();
+                    this.data_here = true;   
+
         });
       });
-      
+
     })
+   
   }
 
 
